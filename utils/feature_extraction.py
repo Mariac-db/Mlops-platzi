@@ -85,6 +85,12 @@ class FeatureExtraction:
             json.dump(dictionary, file, ensure_ascii=False)
         self.logger.info(f"Dictionary successfully saved to {file_path}")
 
+    def save_df_to_csv(self, df: pd.DataFrame, path: str, file_name: str):
+        """This method saves the dataframe to a CSV file"""
+        file_path = os.path.join(path, file_name)
+        df.to_csv(file_path, index=False)
+        self.logger.info(f"Dataframe successfully saved to {file_path}")
+
 
     def run(self, data_path_processed: str, data_version: int): 
         df_tickets = self.read_csv(
@@ -102,6 +108,7 @@ class FeatureExtraction:
             path=data_path_processed,
             file_name=f"topic_mapping_{data_version}.json",
         )
+        self.save_df_to_csv(df_tickets, data_path_processed, f"tickets_inputs_eng_{data_version}.csv")
 
 # TODO: ejecutar run en clase de orquestación
 if __name__ == "__main__":
