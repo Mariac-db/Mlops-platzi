@@ -49,7 +49,7 @@ class TextProcessing:
         nouns = [word for word, pos in tagged if pos == 'NN']
         return ' '.join(nouns)
     
-    def run(self, column_to_process: pd.Series):
+    def text_preprocessing(self, column_to_process: pd.Series):
         """This method is used to run the whole process of cleaning the text"""
         initial_time = datetime.datetime.now()
         tokenized_text = column_to_process.apply(self.tokenize)
@@ -58,7 +58,7 @@ class TextProcessing:
         pos_tagging_tokens = text_lemma.apply(self.pos_tagging)
         final_time = datetime.datetime.now()
         self.logger.info(f"Text successfully processed")
-        self.logger.info(f"final_time - initial_time = {final_time - initial_time}")
+        self.logger.info(f"time = {final_time - initial_time}")
         return  pos_tagging_tokens #text_without_stopwords.apply(lambda x: ' '.join(x))
 
     def save_processed_data(self, df: pd.DataFrame, path: str, file_name: str) -> None:
@@ -89,22 +89,48 @@ class TextProcessing:
         self.logger.info(f"Data successfully transformed")
         return df
 
-# ejecutar script a nivel de utils/textprocessing.py
+    def run(self, file_name: str, version: int): 
+        """Runs the entire text processing pipeline."""
+        name_data_input = f"{file_name}" 
+        PATH_DATA_RAW = "tracking/data/data_raw"
+        PATH_DATA_PROCESSED = "tracking/data/data_processed"
+        # reading JSON data
+        data_tickets = self.read_json(path=PATH_DATA_RAW, file_name=f"{name_data_input}.json")
+        # data transformation
+        data_tickets = self.data_transform(df=data_tickets)
+        # data processing
+        processed_column = self.text_preprocessing(data_tickets["complaint_what_happened"])
+        data_tickets['processed_text'] = processed_column
+        # additional processing
+        data_tickets['processed_text'] = data_tickets['processed_text'].str.replace(r'x+/', '', regex=True)
+        data_tickets['processed_text'] = data_tickets['processed_text'].str.replace('xxxx', '')
+        data_tickets = data_tickets.dropna(subset=["processed_text"])
+        # Saving processed data
+        self.save_processed_data(df=data_tickets, path=PATH_DATA_PROCESSED, file_name=f"{file_name}_{version}.csv")
+        self.logger.info(f"Data successfully saved to {PATH_DATA_PROCESSED}")
+
+# TODO: ejecutar método run en clase de orchestrator
 if __name__ == "__main__":
-    version = "1"
-    file_name = "tickets_classification_eng"
-    name_data_input = f"{file_name}" #change this variable to the name of the file you want to process
-    PATH_DATA_RAW = f"tracking/data/data_raw"
     text_processing = TextProcessing(lenguage="english")
-    data_tickets = text_processing.read_json(path= PATH_DATA_RAW, file_name= f"{name_data_input}.json")
-    data_tickets = text_processing.data_transform(df = data_tickets)
-    # data processing
-    processed_column = text_processing.run(data_tickets["complaint_what_happened"])
-    data_tickets['processed_text'] = processed_column
-    # dates
-    data_tickets['processed_text'] = data_tickets['processed_text'].str.replace(r'x+/', '', regex=True)
-    #names and ids
-    data_tickets['processed_text'] = data_tickets['processed_text'].str.replace('xxxx','')
-    data_tickets = data_tickets.dropna(subset=["processed_text"])
-    PATH_DATA_PROCESSED = "tracking/data/data_processed"
-    text_processing.save_processed_data(df = data_tickets, path = PATH_DATA_PROCESSED, file_name = f"{file_name}_{version}.csv" )
+    text_processing.run(file_name="tickets_classification_eng", version="1")
+
+
+# # ejecutar script a nivel de utils/textprocessing.py
+# if __name__ == "__main__":
+#     version = "1"
+#     file_name = "tickets_classification_eng"
+#     name_data_input = f"{file_name}" #change this variable to the name of the file you want to process
+#     PATH_DATA_RAW = f"tracking/data/data_raw"
+#     text_processing = TextProcessing(lenguage="english")
+#     data_tickets = text_processing.read_json(path= PATH_DATA_RAW, file_name= f"{name_data_input}.json")
+#     data_tickets = text_processing.data_transform(df = data_tickets)
+#     # data processing
+#     processed_column = text_processing.text_preprocessing(data_tickets["complaint_what_happened"])
+#     data_tickets['processed_text'] = processed_column
+#     # dates
+#     data_tickets['processed_text'] = data_tickets['processed_text'].str.replace(r'x+/', '', regex=True)
+#     #names and ids
+#     data_tickets['processed_text'] = data_tickets['processed_text'].str.replace('xxxx','')
+#     data_tickets = data_tickets.dropna(subset=["processed_text"])
+#     PATH_DATA_PROCESSED = "tracking/data/data_processed"
+#     text_processing.save_processed_data(df = data_tickets, path = PATH_DATA_PROCESSED, file_name = f"{file_name}_{version}.csv" )
