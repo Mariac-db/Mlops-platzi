@@ -76,7 +76,7 @@ class FeatureExtraction:
             2: "Mortgage/Loan",
         }
         df["relevant_topics"] = df["relevant_topics"].map(self.dict_mapping)
-        return df, self.dict_mapping
+        return  self.dict_mapping# df, self.dict_mapping
 
     def save_topic_mapping_to_json(self, dictionary: dict, path: str, file_name: str):
         """This method saves the dictionary to a JSON file"""
