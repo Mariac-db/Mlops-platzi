@@ -102,7 +102,7 @@ class FeatureExtraction:
         for idx, topic in enumerate(extracted_topics):
             print(f"Topic {idx}: {topic}")
         df_tickets = self.create_topics()
-        df_tickets, topic_mapping = self.topic_mapping(df_tickets)
+        topic_mapping = self.topic_mapping(df_tickets)
         self.save_topic_mapping_to_json(
             dictionary=topic_mapping,
             path=data_path_processed,
@@ -113,7 +113,7 @@ class FeatureExtraction:
 # TODO: ejecutar run en clase de orquestación
 if __name__ == "__main__":
     feature_extractor_processor = FeatureExtraction()
-    data_path_processed = "tracking/data/data_processed"
+    data_path_processed = "../tracking/data/data_processed"
     data_version = 1
     feature_extractor_processor.run(data_path_processed, data_version)
 
