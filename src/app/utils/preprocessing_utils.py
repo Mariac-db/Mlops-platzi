@@ -21,10 +21,6 @@ def remove_stopwords(tokens):
     filtered_tokens = [word for word in tokens if word.lower() not in stop_words]
     return filtered_tokens
 
-def lemmatize(tokens):
-    """This function is used to lemmatize the text""" 
-    lemmatized_tokens = [lemmatizer.lemmatize(word) for word in tokens]
-    return lemmatized_tokens
 
 def pos_tagging(tokens):
     """This function is used to pos_tagging the text"""
@@ -36,7 +32,8 @@ def preprocessing_fn(x: str):
     """This function performs preprocessing including tokenization, removing stopwords, lemmatization, and extracting nouns"""
     tokens = tokenize_text(x)
     tokens_without_stopwords = remove_stopwords(tokens)
-    lemmatized_tokens = lemmatize(tokens_without_stopwords)
-    nouns = pos_tagging(lemmatized_tokens)
+    nouns = pos_tagging(tokens_without_stopwords)
     return nouns
 
+
+#print(preprocessing_fn("Hi i wanna kwnow about invertions and how can I get a loan for a house"))
