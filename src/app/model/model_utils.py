@@ -286,7 +286,7 @@ def plot_confusion_matrix(confusion_matrix, label_names):
 
 run_training(
     num_labels=3,
-    num_epochs=9,
+    num_epochs=5,
     test_size=0.2,
     val_size=0.2,
     random_state=42,
