@@ -111,7 +111,7 @@ class FeatureExtraction:
 # TODO: ejecutar run en clase de orquestación
 if __name__ == "__main__":
     feature_extractor_processor = FeatureExtraction()
-    data_path_processed = "../tracking/data/data_processed"
+    data_path_processed = "tracking/data/data_processed"
     data_version = 1
     feature_extractor_processor.run(data_path_processed, data_version)
 
