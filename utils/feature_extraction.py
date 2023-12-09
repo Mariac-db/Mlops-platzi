@@ -7,9 +7,7 @@ import pandas as pd
 import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.decomposition import NMF
-
 warnings.filterwarnings("ignore")
-
 
 class FeatureExtraction:
     def __init__(self) -> None:
@@ -117,22 +115,3 @@ if __name__ == "__main__":
     data_version = 1
     feature_extractor_processor.run(data_path_processed, data_version)
 
-# if __name__ == "__main__":
-#     feature_extractor_processor = FeatureExtraction()
-#     data_path_processed = "tracking/data/data_processed"
-#     data_version = 1
-#     df_tickets = feature_extractor_processor.read_csv(
-#         path=data_path_processed,
-#         file_name=f"tickets_classification_eng_{data_version}.csv",
-#     )
-#     feature_extractor_processor.fit(df_tickets)
-#     extracted_topics = feature_extractor_processor.topic_modeling_nmf(n_components=4)
-#     for idx, topic in enumerate(extracted_topics):
-#         print(f"Topic {idx}: {topic}")
-#     df_tickets = feature_extractor_processor.create_topics()
-#     df_tickets, topic_mapping = feature_extractor_processor.topic_mapping(df_tickets)
-#     feature_extractor_processor.save_topic_mapping_to_json(
-#         dictionary=topic_mapping,
-#         path=data_path_processed,
-#         file_name=f"topic_mapping_{data_version}.json",
-#     )

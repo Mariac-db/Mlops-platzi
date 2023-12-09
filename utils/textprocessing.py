@@ -59,7 +59,7 @@ class TextProcessing:
         final_time = datetime.datetime.now()
         self.logger.info(f"Text successfully processed")
         self.logger.info(f"time = {final_time - initial_time}")
-        return  pos_tagging_tokens #text_without_stopwords.apply(lambda x: ' '.join(x))
+        return pos_tagging_tokens #text_without_stopwords.apply(lambda x: ' '.join(x))
 
     def save_processed_data(self, df: pd.DataFrame, path: str, file_name: str) -> None:
         """This method saves the processed data and labels to a CSV"""
@@ -74,6 +74,12 @@ class TextProcessing:
             datos = json.load(file)
         df_tickets = pd.json_normalize(datos)
         return df_tickets
+    
+    def read_csv(self, path: str, file_name: str):
+        """This method is used to read the csv file"""
+        file_path = os.path.join(path, file_name)
+        df_tickets = pd.read_csv(file_path)
+        return df_tickets 
     
     def data_transform(self, df: pd.DataFrame):
         """This method is used to transform the data to a vector"""
@@ -111,26 +117,5 @@ class TextProcessing:
 
 # TODO: ejecutar método run en clase de orchestrator
 if __name__ == "__main__":
-    text_processing = TextProcessing(lenguage="english")
+    text_processing = TextProcessing(lenguage="spanish")
     text_processing.run(file_name="tickets_classification_eng", version="1")
-
-
-# # ejecutar script a nivel de utils/textprocessing.py
-# if __name__ == "__main__":
-#     version = "1"
-#     file_name = "tickets_classification_eng"
-#     name_data_input = f"{file_name}" #change this variable to the name of the file you want to process
-#     PATH_DATA_RAW = f"tracking/data/data_raw"
-#     text_processing = TextProcessing(lenguage="english")
-#     data_tickets = text_processing.read_json(path= PATH_DATA_RAW, file_name= f"{name_data_input}.json")
-#     data_tickets = text_processing.data_transform(df = data_tickets)
-#     # data processing
-#     processed_column = text_processing.text_preprocessing(data_tickets["complaint_what_happened"])
-#     data_tickets['processed_text'] = processed_column
-#     # dates
-#     data_tickets['processed_text'] = data_tickets['processed_text'].str.replace(r'x+/', '', regex=True)
-#     #names and ids
-#     data_tickets['processed_text'] = data_tickets['processed_text'].str.replace('xxxx','')
-#     data_tickets = data_tickets.dropna(subset=["processed_text"])
-#     PATH_DATA_PROCESSED = "tracking/data/data_processed"
-#     text_processing.save_processed_data(df = data_tickets, path = PATH_DATA_PROCESSED, file_name = f"{file_name}_{version}.csv" )

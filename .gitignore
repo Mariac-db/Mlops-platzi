@@ -5,4 +5,4 @@ tracking/backend.db
 tracking/experiment_ml/
 utils/__pycache__
 tracking/mlflow.db
-tracking/data
+#tracking/data
