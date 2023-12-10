@@ -1,4 +1,4 @@
-# pull the official docker image
+# pull the official docker image with python version
 FROM python:3.9.10-slim
 
 # set work directory
