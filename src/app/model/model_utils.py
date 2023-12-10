@@ -12,6 +12,9 @@ import pandas as pd
 import mlflow
 import warnings
 from tqdm import tqdm
+from sklearn.metrics import ConfusionMatrixDisplay
+
+
 warnings.filterwarnings("ignore")
 
 mlflow.set_tracking_uri("sqlite:///backend.db")
@@ -70,6 +73,8 @@ def prepare_data(test_size=0.2, val_size=0.2, random_state=42):
         y_val (list): list of labels for validation
         y_test (list): list of labels for testing
     """
+    global idx2label
+
     idx2label = read_idx2label(
         json_path="src/app/model/data/data_preprocessed/topic_mapping_1.json"
     )
@@ -182,6 +187,13 @@ def test_model(model, test_loader, loss_fn, device):
     
     return avg_loss, accuracy, precision, recall, all_labels, all_predictions
 
+def decode_idx_into_labels(labels, idx2label):
+    """Decode labels into their original values using the idx2label dictionary
+        Args: 
+            - labels (int[list]): labels can be predctions or true labels
+            - idx2label (dict): with id to labels mapping"""
+    decoded_labels = [idx2label[str(label_idx)] for label_idx in labels]
+    return decoded_labels
 
 def run_training(
     num_labels=3,
@@ -266,6 +278,16 @@ def run_training(
         print(f"Test Accuracy: {test_accuracy:.4f}")
         print(f"Test Precision: {test_precision:.4f}")
         print(f"Test Recall: {test_recall:.4f}")
+
+        test_labels_decoded = decode_idx_into_labels(test_labels, idx2label)
+        test_predictions_decoded = decode_idx_into_labels(test_labels, idx2label)
+
+        fig, ax = plt.subplots(figsize=(12, 8))
+        cm = confusion_matrix(test_labels_decoded, test_predictions_decoded)
+        cmp = ConfusionMatrixDisplay(cm, display_labels= list(idx2label.values()))
+        cmp.plot(ax=ax)
+        plt.xticks(rotation=80)
+        plt.show()
 
         # Plotear matriz de confusión
         cm = confusion_matrix(test_labels, test_predictions)
