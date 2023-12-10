@@ -21,6 +21,10 @@ torch = "^2.1.1"
 boto3 = "^1.33.6"
 
 
+[tool.poetry.group.dev.dependencies]
+fastapi = "^0.104.1"
+uvicorn = "^0.24.0.post1"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
