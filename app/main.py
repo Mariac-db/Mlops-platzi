@@ -1,5 +1,6 @@
 
 import joblib
+import numpy as np
 from fastapi import FastAPI
 from pydantic import BaseModel
 from app.db import engine, create_db_and_tables, User

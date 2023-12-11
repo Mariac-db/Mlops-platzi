@@ -53,7 +53,6 @@ def preprocessing_fn(x):
 
 
 def run_preprocessing_fn(X):
-    # testing with dict
     if isinstance(X, list):
         processed_data = [preprocessing_fn(text) for text in X]
         return processed_data
