@@ -1,12 +1,30 @@
 # src/app/docker-compose.yml
-
 version: '3.8'
 
 services:
   web:
     build: .
-    command: uvicorn app.main:app --host 0.0.0.0
+    command: bash -c 'while !</dev/tcp/db/5432; do sleep 1; done; uvicorn app.main:app --reload --host 0.0.0.0'
     volumes:
       - .:/app
     ports:
-      - 8008:8000
+      - "5004:8000"
+    environment:
+      - DATABASE_URL=postgresql://fastapi_traefik:fastapi_traefik@db:5432/fastapi_traefik
+    depends_on:
+      - db
+  db:
+    image: postgres:15-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    ports:
+      - "5433:5432"
+    expose:
+      - 5432
+    environment:
+      - POSTGRES_USER=fastapi_traefik
+      - POSTGRES_PASSWORD=fastapi_traefik
+      - POSTGRES_DB=fastapi_traefik
+
+volumes:
+  postgres_data:
