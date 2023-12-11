@@ -49,7 +49,7 @@ def preprocessing_fn(x):
     tokens_without_stopwords = remove_stopwords(tokens)
     nouns = pos_tagging(tokens_without_stopwords)
     X_vectorized = vectorize_text(nouns)
-    return X_vectorized.toarray()
+    return X_vectorized
 
 
 def run_preprocessing_fn(X):
@@ -57,16 +57,6 @@ def run_preprocessing_fn(X):
     if isinstance(X, list):
         processed_data = [preprocessing_fn(text) for text in X]
         return processed_data
-
-
-if __name__ == "__main__":
-
-    X_vectorized = run_preprocessing_fn(["I'm facing difficulties with loan interest calculations", 
-                                       ])
-    model = joblib.load("model.pkl")
-    print(X_vectorized)
-    print(type(np.array(X_vectorized)))
-    quiero_morir_pero_aun_no = model.predict(X_vectorized)
 
 
 
