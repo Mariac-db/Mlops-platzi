@@ -37,11 +37,9 @@ def pos_tagging(tokens):
 def vectorize_text(text: list[str]):
     """This function transforms data for prediction"""
     X_vectorized = count_vectorizer.transform([text])
-    print(X_vectorized.toarray().shape)  # Utiliza transform() en lugar de fit_transform()
     tfidf_transformer = TfidfTransformer()
     tfidf_matrix = tfidf_transformer.fit_transform(X_vectorized)
     return tfidf_matrix
-
 
 def preprocessing_fn(x):
     """This function performs preprocessing including tokenization, removing stopwords, lemmatization, and extracting nouns"""
@@ -53,9 +51,9 @@ def preprocessing_fn(x):
 
 
 def run_preprocessing_fn(X):
-    if isinstance(X, list):
-        processed_data = [preprocessing_fn(text) for text in X]
-        return processed_data
+    """ This functions runs the preprocessing pipeline """
+    processed_data = [preprocessing_fn(text) for text in X]
+    return processed_data
 
 
 
