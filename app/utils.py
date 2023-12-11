@@ -55,5 +55,7 @@ def run_preprocessing_fn(X):
     processed_data = [preprocessing_fn(text) for text in X]
     return processed_data
 
+#TODO: cambiar nombre de variables por text
+
 
 
