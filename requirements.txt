@@ -6,3 +6,4 @@ asyncpg==0.27.0
 ormar==0.12.1
 psycopg2-binary==2.9.5
 scikit-learn==1.3.2
+sqlmodel==0.0.12
