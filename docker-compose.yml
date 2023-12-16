@@ -1,6 +1,8 @@
 # src/app/docker-compose.yml
 version: '3.8'
 
+
+
 services:
   web:
     build: .
@@ -13,6 +15,7 @@ services:
       - DATABASE_URL=postgresql://fastapi_traefik:fastapi_traefik@db:5432/fastapi_traefik
     depends_on:
       - db
+
   db:
     image: postgres:15-alpine
     volumes:
@@ -26,5 +29,32 @@ services:
       - POSTGRES_PASSWORD=fastapi_traefik
       - POSTGRES_DB=fastapi_traefik
 
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "8080:8080"
+    
+
+  grafana:
+      image: grafana/grafana
+      user: "472"
+      ports:
+        - "3000:3000"
+      volumes:
+        - ./config/grafana_datasources.yaml:/etc/grafana/provisioning/datasources/datasource.yaml:ro
+        - ./config/grafana_dashboards.yaml:/etc/grafana/provisioning/dashboards/dashboards.yaml:ro
+        - ./dashboards:/opt/grafana/dashboards
+     
+      restart: always
+
 volumes:
   postgres_data:
+  grafana_data: {}
+
+
+
+
+
+
+
