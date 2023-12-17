@@ -50,6 +50,7 @@ A modo de resumen toma nota de lo siguiente porque lo vas a necesitar :
 * endpoint
 
 Una vez más, debemos ir a configurar el grupo de seguridad para que nuestra base de datos pueda comunicarse, por lo que hacemos la conexión de type PostSQL y habilitamos el port 5432. De esta manera, el servidor se podrá conectar a la base de postgresql como backend.db. Tal y como lo hemos aprendido en nuestra forma de tracking 2. En grupos de seguridad debes de tener en cuenta que debe de ser el mismo grupo de nuestra instancia EC2 que hemos credo previamente. 
+
 <img src="../images/postgresql_inbound_rule.png"/>
 
 5. Conexión a la EC2 instancia y acceder al server tracking de mlflow. 
