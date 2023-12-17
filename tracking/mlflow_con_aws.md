@@ -22,8 +22,6 @@ Posteriormente, tenemos que editar los grupos de seguridad para que nuestra inst
 
 Vamos a s3 damos click en "create bucket". 
 
-<img src="images/s3_bucket.png" width=400/>
-
 Note: El nombre del bucket debe ser único. 
 
 4. Creamos un PostgreSQL database para ser usado como backend store. 
@@ -53,7 +51,7 @@ A modo de resumen toma nota de lo siguiente porque lo vas a necesitar :
 
 Once the DB instance is created, go to the RDS console, select the new db and under "Connectivity & security" select the VPC security group. Modify the security group by adding a new inbound rule that allows postgreSQL connections on the port 5432 from the security group of the EC2 instance. This way, the server will be able to connect to the postgres database.
 
-<img src="images/postgresql_inbound_rule.png" width=400/>
+<img src="../images/postgresql_inbound_rule.png" width=400/>
 
 5. Conexión a la EC2 instancia y acceder al server tracking de mlflow. 
 
