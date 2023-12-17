@@ -49,22 +49,24 @@ A modo de resumen toma nota de lo siguiente porque lo vas a necesitar :
 * initial database name
 * endpoint
 
-Una vez más, debemos ir a configurar el grupo de seguridad para que nuestra base de datos pueda comunicarse, por lo que hacemos la conexión de type PostSQL y habilitamos el port 5432. De esta manera, el servidor se podrá conectar a la base de postgresql como backend.db. Tal y como lo hemos aprendido en nuestra forma de tracking 2. 
-
-
+Una vez más, debemos ir a configurar el grupo de seguridad para que nuestra base de datos pueda comunicarse, por lo que hacemos la conexión de type PostSQL y habilitamos el port 5432. De esta manera, el servidor se podrá conectar a la base de postgresql como backend.db. Tal y como lo hemos aprendido en nuestra forma de tracking 2. En grupos de seguridad debes de tener en cuenta que debe de ser el mismo grupo de nuestra instancia EC2 que hemos credo previamente. 
 <img src="../images/postgresql_inbound_rule.png"/>
 
 5. Conexión a la EC2 instancia y acceder al server tracking de mlflow. 
 
 Vamos a darle vida y setear dependencias y todo lo que necesitamos:
 
-* `sudo yum update`
+* `sudo yum update -y` actualizamos paquetes de la instancia
+* `sudo yum install -y python3-pip`
+*  `pip3 --version`
 * `pip3 install mlflow boto3 psycopg2-binary`
-* `aws configure`   # you'll need to input your AWS credentials here
-* `mlflow server -h 0.0.0.0 -p 5000 --backend-store-uri postgresql://DB_USER:DB_PASSWORD@DB_ENDPOINT:5432/DB_NAME --default-artifact-root s3://S3_BUCKET_NAME`
+* `aws configure`   # añades tus tokens de acceso de aws
+* `mlflow server -h 0.0.0.0 -p 5000 --backend-store-uri postgresql://DB_USER:DB_PASSWORD@DB_ENDPOINT:5432/DB_NAME --default-artifact-root s3://S3_BUCKET_NAME` hacemos esta configuración! 
 
-Note: before launching the server, check that the instance can access the s3 bucket created in the step number 3. To do that, just run this command from the EC2 instance: `aws s3 ls`. You should see the bucket listed in the result.
+Note: Para verificar que todo funciona super bien, verifica con `aws s3 ls`
 
 6. Acceso al servidor de forma local.
 
-Abre tu navegador e ingresa: `http://<EC2_PUBLIC_DNS_DE_TU_EC2>:5000` (Esto lo puedes ver en la configuración de tu instancia).
+Abre tu navegador e ingresa: `http://<EC2_PUBLIC_DNS_DE_TU_EC2>:5000` (Esto lo puedes ver en la configuración de tu instancia). 
+
+7. Vamos al código y ejecuta tu software de ML con mlflow! 

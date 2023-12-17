@@ -7,3 +7,4 @@ utils/__pycache__
 tracking/mlflow.db
 #tracking/data
 backend.db
+tracking/credentials_aws.py
