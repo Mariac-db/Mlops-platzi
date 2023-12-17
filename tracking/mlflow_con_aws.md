@@ -28,7 +28,7 @@ Note: El nombre del bucket debe ser único.
 
 Ingresamos al servicio de RDS damos click en "Create database". Elige la versión.
 
-<img src="../images/postgresql.png" width=500/>
+<img src="../images/postgresql.png"/>
 
 Asigna nombre a la  DB instance, asigna como master username a "mlflow" y genera la contraseña automáticamente. 
 
