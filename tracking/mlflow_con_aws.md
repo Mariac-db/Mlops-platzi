@@ -16,7 +16,7 @@ Adicionalmente, debemos crear una nueva key la cual nos va a permitir ingresar a
 
 Posteriormente, tenemos que editar los grupos de seguridad para que nuestra instancia EC2 pueda aceptar la conexión SSH (mediante port 22) y para mlflow nos podamos conectar a traves del port 5000 (Type Custom TCP):
 
-<img src="../images/security_group.png" width=400/>
+<img src="../images/security_group.png" width=500/>
 
 3. Creamos bucket para almacenar nuestros metadatos y artifacts.
 
@@ -28,7 +28,7 @@ Note: El nombre del bucket debe ser único.
 
 Ingresamos al servicio de RDS damos click en "Create database". Elige la versión.
 
-<img src="../images/postgresql.png" width=400/>
+<img src="../images/postgresql.png" width=500/>
 
 Asigna nombre a la  DB instance, asigna como master username a "mlflow" y genera la contraseña automáticamente. 
 
