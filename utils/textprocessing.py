@@ -20,7 +20,7 @@ class TextProcessing:
     then, this data transformed to a dataframe and saved to a CSV file
     The idea is to use this class in the pipeline to feature extration process"""
 
-    def __init__(self, lenguage: str):
+    def __init__(self, language: str):
         """This class is used to process the text
         Class parameters:
             lenguage (str): Language of the text to process
@@ -29,13 +29,13 @@ class TextProcessing:
         self.logger = logging.getLogger(__name__)
 
         nltk.download("averaged_perceptron_tagger")
-        self.lenguage = lenguage
-        self.stop_words = set(stopwords.words(self.lenguage))
-        self.stemmer = SnowballStemmer(self.lenguage)
+        self.lenguage = language
+        self.stop_words = set(stopwords.words(self.language))
+        self.stemmer = SnowballStemmer(self.language)
 
     def tokenize(self, text: str):
         """This method is used to tokenize the text"""
-        tokens = word_tokenize(text.lower(), language=self.lenguage)
+        tokens = word_tokenize(text.lower(), language=self.language)
         return tokens
 
     def remove_stopwords(self, tokens: list):
@@ -104,15 +104,18 @@ class TextProcessing:
                 "_source.sub_product": "sub_product",
             }
         )
-        df["ticket_classification"] = df["category"] + " + " + df["sub_product"]
+        df["ticket_classification"] = (
+            df["category"] + " + " + df["sub_product"]
+        )
         df = df.drop(["sub_product", "category"], axis=1)
         df["complaint_what_happened"] = df["complaint_what_happened"].replace(
             "", np.nan
         )
         df = df.dropna(subset=["complaint_what_happened", "ticket_classification"])
         df = df.reset_index(drop=True)
-        self.logger.info(f"Data successfully transformed")
+        self.logger.info("Data successfully transformed")
         return df
+
 
     def run(self, file_name: str, version: int):
         """Runs the entire text processing pipeline."""
@@ -149,5 +152,5 @@ class TextProcessing:
 
 # TODO: ejecutar método run en clase de orchestrator
 if __name__ == "__main__":
-    text_processing = TextProcessing(lenguage="spanish")
+    text_processing = TextProcessing(language="english")
     text_processing.run(file_name="tickets_classification_eng", version="1")

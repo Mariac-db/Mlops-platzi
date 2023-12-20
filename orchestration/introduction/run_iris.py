@@ -50,4 +50,5 @@ def iris_classification():
     X_train, X_test, y_train, y_test = split_data(dataset)
     train_model(X_train, X_test, y_train, y_test)
 
+
 iris_classification()
