@@ -170,9 +170,9 @@ def training_best_model(
 
 @flow
 def main_flow():
-    #text_processing_task(language = LANGUAGE, file_name = FILE_NAME_DATA_INPUT, version = VERSION)
-    #feature_extraction_task(data_path_processed = DATA_PATH_PROCESSED,
-    #                       data_version = VERSION)
+    text_processing_task(language = LANGUAGE, file_name = FILE_NAME_DATA_INPUT, version = VERSION)
+    feature_extraction_task(data_path_processed = DATA_PATH_PROCESSED,
+                            data_version = VERSION)
     X_train, X_test, y_train, y_test, count_vectorizer = data_transformation_task_and_split(
         data_input_path=DATA_PATH_PROCESSED,
         file_name="tickets_inputs_eng_",
