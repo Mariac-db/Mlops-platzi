@@ -15,7 +15,7 @@ from sklearn.model_selection import train_test_split
 from prefect import flow, task
 
 # Local application imports
-from config import * 
+from config import *
 from utils import * 
 from feature_extraction import FeatureExtraction
 from text_processing import TextProcessing
