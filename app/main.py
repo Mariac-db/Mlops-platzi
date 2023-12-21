@@ -15,15 +15,16 @@ label_mapping = {
     "1": "Credit Report or Prepaid Card",
     "2": "Mortgage/Loan"}
 
-
+# define data structure for each input 
 class Sentence(BaseModel):
     client_name: str
     text: str 
 
+# define data structure for request 
 class ProcessTextRequestModel(BaseModel):
     sentences: list[Sentence]
 
-
+#entrypoint
 @app.post("/predict")
 async def read_root(data: ProcessTextRequestModel):
 
@@ -41,7 +42,7 @@ async def read_root(data: ProcessTextRequestModel):
         preds = model.predict(X_dense)
         decoded_predictions = label_mapping[str(preds[0])]
 
-        
+        # create object with predictions
         prediction_ticket = PredictionsTickets(
             client_name=sentence.client_name,
             prediction=decoded_predictions
@@ -56,13 +57,13 @@ async def read_root(data: ProcessTextRequestModel):
         
         session.add(prediction_ticket)
 
-    session.commit()
+    session.commit() # bulk
     session.close()
 
     return {"predictions": preds_list}
 
 
-
+#initial event of app - db initialization 
 @app.on_event("startup")
 async def startup():
     create_db_and_tables()
