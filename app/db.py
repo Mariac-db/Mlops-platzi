@@ -19,7 +19,7 @@ engine = create_engine(settings.db_url, echo=True)
 
 
 def create_db_and_tables():
-     """
+    """
     Create tables in the database.
 
     This function uses the database engine to create all tables
