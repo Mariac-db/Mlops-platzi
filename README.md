@@ -3,7 +3,7 @@
 
 1. Crea una instancia en AWS
 
-Con Sys de Ubuntu y tamaño small. No olvides generar tus keys(Key par)
+Con Sys de Ubuntu y tamaño small. No olvides generar tus keys (Key par)
 
 <img src="images/creacion_ec2.png/">
 
@@ -14,7 +14,7 @@ Con Sys de Ubuntu y tamaño small. No olvides generar tus keys(Key par)
 `ssh_keygen`
 `cat .ssh/id_rsa.pub` (copiar contenido de llaves)
 
-Ir al repositorio y añadir las llaves, sobre decir que NO debes compartirlas con nadie. 
+Ir al repositorio y añadir las llaves, sobra decir que NO debes compartirlas con nadie. 
 
 <img src="images/copiar_llaves_github.png/">
 
