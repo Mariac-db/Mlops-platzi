@@ -24,6 +24,9 @@ Vamos a s3 damos click en "create bucket".
 
 Note: El nombre del bucket debe ser único. 
 
+Para la connectivity vamos a indicar que sea pública, desde cualquier dirección e indicamos db port. 
+
+<img src="../images/connectivity.png"/>
 
 
 4. Creamos un PostgreSQL database para ser usado como backend store. 
