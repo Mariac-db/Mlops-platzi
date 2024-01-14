@@ -24,23 +24,21 @@ Vamos a s3 damos click en "create bucket".
 
 Note: El nombre del bucket debe ser único. 
 
+
+
 4. Creamos un PostgreSQL database para ser usado como backend store. 
 
 Ingresamos al servicio de RDS damos click en "Create database". Elige la versión.
 
 <img src="../images/postgresql.png"/>
 
-Asigna nombre a la  DB instance, asigna como master username a "mlflow" y genera la contraseña automáticamente. 
-
-<img src="../images/db_settings.png"/>
+Asigna nombre a la  DB instance (puede ser mlflow), asigna un username y por último,  asigna una contraseña, la puedes generar automáticamente también si lo deseas. 
 
 Finalmente, dada la configuración especificada, se creará una db inicial para ti. 
 
-<img src="../images/db_configuration.png"/>
+<img src="../images/initial_database.png"/>
 
-Una vez creada la db, copia la contraseña porque la verás una única vez y la necesitaremos más adelante. 
-
-
+Una vez creada la db, copia la contraseña porque la verás una única vez y la necesitaremos más adelante (en el caso que la hayas creado automáticamente). 
 
 A modo de resumen toma nota de lo siguiente porque lo vas a necesitar :
 
