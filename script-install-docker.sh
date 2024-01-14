@@ -22,11 +22,3 @@ sudo su - ${USER}
 id -nG
 
 sudo usermod -aG docker ubuntu
-
-## END ##
-
-docker ps
-
-      - POSTGRES_USER=fastapi_traefik_prod
-      - POSTGRES_PASSWORD=fastapi_traefik_prod
-      - POSTGRES_DB=fastapi_traefik_prod
