@@ -27,8 +27,6 @@ Ir al repositorio y añadir las llaves, sobre decir que NO debes compartirlas co
 Para ambas configuración de Custom TCP indicamos conexión desde cualquier dirección IP (IPv4). Recuerda que una dirección IP (También conocido como local host). IP identifica a un dispositivo en una red, esta IP puede ser local, pública o privada. El PORT o puerto, es un número que indica que se usa para dirigir datos a un servicio o dispositivos dada una dirección determinada. No tienes que ser experto en backend para desplegar modelos de Machine Learning, es cuestión de comprender cosas básicas para que puedas hacer la integración de las partes de un sistema. 
 
 
-<img src="images/copiar_llaves_github.png/">
-
 4. Al interior del repo realiza un swith a la rama productiva donde haremos el deploy y ejecuta los comandos que se encuentran en `script-install-docker.sh`
 
 
@@ -42,4 +40,3 @@ Ejecuta en consola el build y el up del docker:
 ¡Sigue los pasos de la clase de deploy!
 
 
-#insertar imagen
