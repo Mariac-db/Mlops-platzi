@@ -19,7 +19,7 @@ Este repositorio tiene dos ramas principales: `master` y `deploy_prod`. En `mast
 
 Te invito a que añadas todo lo que ya sabes del Machine Learning, haz modelos increíbles; no olvides hacer validación de hiperparámetros, los tests necesarios para reconocer cuando te enfrentas con underfitting u overfitting, y tomar acciones de si disminuyes dimensionalidad de tus datos, aumentas la data, haces features engineering, etc. En los temas que ya vimos, te recomiendo que pongas en práctica todo lo que aprendiste, y para hacer más profesionales tus flujos, atrévete a desarrollar workflows, agendarlos, usar artefactos como input y output entre las tasks. Y añadas toda la lógica que necesitas si requieres de triggers o notificaciones.
 
-Si enfrentas problemas de cómputo, no olvides que puedes usar los recursos de la nube, puedes hacer paralelimso con Dask, usar un cluster de Spark, usar multiprocessing, etc. Y si necesitas más  procesamiento, en tu arquitectura no olvides procesar por chunks o mejorar las estrategias de procesamiento. 
+Si enfrentas problemas de cómputo, no olvides que puedes usar los recursos de la nube, puedes hacer paralelismo con Dask, usar un cluster de Spark, usar multiprocessing, etc. Y si necesitas más  procesamiento, en tu arquitectura no olvides procesar por chunks o mejorar las estrategias de procesamiento. 
 
 
 Si en algún momento tienes dudas o necesitas ayuda, ¡no dudes en escribirme! Estoy aquí para ayudarte y recuerda que tus compañeros también pueden ser una gran fuente de conocimiento y apoyo. ¡Disfruta el curso y mucha suerte en tu aprendizaje!
