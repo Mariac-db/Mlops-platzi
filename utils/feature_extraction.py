@@ -62,7 +62,7 @@ class FeatureExtraction:
         df_doc_topics = pd.DataFrame(
             np.round(self.W, 2), columns=col_names, index=tickets_names
         )
-        top_topics = np.argmax(self.df.values, axis=1)
+        top_topics = np.argmax(self.W, axis=1)
         df_doc_topics["relevant_topics"] = top_topics
         print(df_doc_topics.head())
         self.df["relevant_topics"] = top_topics
@@ -97,7 +97,7 @@ class FeatureExtraction:
             file_name=f"tickets_classification_eng_{data_version}.csv",
         )
         self.fit(df_tickets)
-        extracted_topics = self.topic_modeling_nmf(n_components=4)
+        extracted_topics = self.topic_modeling_nmf(n_components=3)
         for idx, topic in enumerate(extracted_topics):
             print(f"Topic {idx}: {topic}")
         df_tickets = self.create_topics()
